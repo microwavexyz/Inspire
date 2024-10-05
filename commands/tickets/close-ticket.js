@@ -3,7 +3,7 @@ import logTicketAction from '../../functions/logTicketAction.js';
 import checkPermissions from '../../functions/checkPermissions.js';
 import { saveTranscript } from '../../functions/saveTranscript.js';
 
-const supportRoleId = '1285433668415782974'; // Replace with your support role ID
+const supportRoleId = '1282106458443485294'; // Replace with your support role ID
 
 export default {
     data: new SlashCommandBuilder()
