@@ -2,7 +2,7 @@
 
 import { EmbedBuilder } from 'discord.js';
 
-const LOG_CHANNEL_ID = '1285433668415782974'; // Replace with your log channel ID
+const LOG_CHANNEL_ID = '1285443399159386164'; // Replace with your log channel ID
 
 const ACTION_COLORS = {
     'Closed': 0xFF0000,
