@@ -1,7 +1,7 @@
 import { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
 import checkPermissions from '../../functions/checkPermissions.js';
 
-const supportRoleId = process.env.SUPPORT_ROLE_ID || '1292210184055427114';
+const supportRoleId = process.env.SUPPORT_ROLE_ID || '1282106458443485294';
 
 export default {
     data: new SlashCommandBuilder()
