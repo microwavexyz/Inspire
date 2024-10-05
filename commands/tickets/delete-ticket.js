@@ -3,8 +3,8 @@ import { saveTranscript } from '../../functions/saveTranscript.js';
 import logTicketAction from '../../functions/logTicketAction.js';
 import checkPermissions from '../../functions/checkPermissions.js';
 
-const supportRoleId = process.env.SUPPORT_ROLE_ID || '1292210184055427114';
-const LOG_CHANNEL_ID = '1285433668415782974'; // Ensure this matches the ID in logTicketAction.js
+const supportRoleId = process.env.SUPPORT_ROLE_ID || '1282106458443485294';
+const LOG_CHANNEL_ID = '1285443399159386164'; // Ensure this matches the ID in logTicketAction.js
 
 export default {
     data: new SlashCommandBuilder()
