@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
+import { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits, ChannelType } from 'discord.js';
 import checkPermissions from '../../functions/checkPermissions.js';
 
 const supportRoleId = process.env.SUPPORT_ROLE_ID || '1282106458443485294';
@@ -34,6 +34,15 @@ export default {
             // Check if the bot has permissions in the specified channel
             if (!channel.viewable || !channel.permissionsFor(interaction.client.user).has(['SendMessages', 'EmbedLinks'])) {
                 return this.respondToInteraction(interaction, 'I do not have sufficient permissions to send messages or embeds in the specified channel.');
+            }
+
+            // Check if the user already has a ticket panel open
+            const existingPanel = channel.messages.cache.find(message => 
+                message.embeds[0]?.title === '🎫 Support Tickets' && message.author.id === interaction.client.user.id
+            );
+
+            if (existingPanel) {
+                return this.respondToInteraction(interaction, 'A ticket panel already exists in this channel.');
             }
 
             // Create the ticket panel embed and button
