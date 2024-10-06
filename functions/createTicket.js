@@ -1,5 +1,8 @@
 import { ChannelType, PermissionFlagsBits, EmbedBuilder } from 'discord.js';
 
+const supportRoleId = process.env.SUPPORT_ROLE_ID || '1282106458443485294';
+const ticketCategoryId = '1282124076000739399';
+
 export async function handleCreateTicket(interaction) {
     try {
         // Check if the interaction has already been replied to or deferred
@@ -31,10 +34,11 @@ export async function handleCreateTicket(interaction) {
             return;
         }
 
-        // Create a new channel for the ticket
+        // Create a new channel for the ticket inside the specified category
         const channel = await guild.channels.create({
             name: `ticket-${user.username}`,
             type: ChannelType.GuildText,
+            parent: ticketCategoryId,
             permissionOverwrites: [
                 {
                     id: guild.id,
@@ -44,7 +48,10 @@ export async function handleCreateTicket(interaction) {
                     id: user.id,
                     allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages],
                 },
-                // Add permissions for support role if needed
+                {
+                    id: supportRoleId,
+                    allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages],
+                },
             ],
         });
 
@@ -55,8 +62,11 @@ export async function handleCreateTicket(interaction) {
             .setColor('#00FF00')
             .setTimestamp();
 
-        // Send the welcome message in the new ticket channel
-        await channel.send({ embeds: [welcomeEmbed] });
+        // Send the welcome message in the new ticket channel and ping the support role and user
+        await channel.send({ 
+            content: `<@&${supportRoleId}> <@${user.id}>`, 
+            embeds: [welcomeEmbed] 
+        });
 
         // Create an embed for the user response
         const responseEmbed = new EmbedBuilder()
